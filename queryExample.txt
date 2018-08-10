@@ -1,0 +1,7 @@
+{
+  photos(parameter:"21"){
+    Id
+    Name
+  }
+  
+}
