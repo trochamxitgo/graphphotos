@@ -14,7 +14,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    photos: [Photo]
+    photos(parameter:String): [Photo]
     Name: String
   }
 `;
@@ -22,8 +22,8 @@ const typeDefs = gql`
 // A map of functions which return data for the schema.
 const resolvers = {
   Query: {
-    photos: () =>
-      fetch('https://services.odata.org/V4/TripPinService/Photos?$format=JSON')
+    photos: (parent, args) =>
+      fetch('https://services.odata.org/V4/TripPinService/Photos?$format=JSON&$filter=Id%20eq%20' + args.parameter)
         .then(res => res.json())
         .then(data => data.value),
   },
